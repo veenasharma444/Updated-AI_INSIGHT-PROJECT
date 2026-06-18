@@ -1,10 +1,466 @@
-[OK] Login success: veenash
-[OK] Upload saved: 20260618-145058-39cc6da1 (4,205 rows)
+[OK] Store data pre-initialized
+REGISTERING UPDATE_CHARTS CALLBACK
+PAGE_CONFIG LOADED
+[OK] Loading active user upload: .cache/user_uploads\20260618-145058-39cc6da1.pkl
+[OK] Loaded 4,205 rows x 31 cols from user upload
+  - Client Name: categorical (cardinality=1202, missing=0.2%)
+  - Marsha: categorical (cardinality=555, missing=57.6%)
+  - Property Name: categorical (cardinality=451, missing=77.3%)
+  - Invoice No: categorical (cardinality=4198, missing=0.2%)
+  - Invoice Date: temporal (cardinality=528, missing=0.2%)
+  - Due Days: numeric (cardinality=528, missing=0.2%)
+  - Revenue Head: categorical (cardinality=26, missing=8.3%)
+  - Nature of Services: categorical (cardinality=6, missing=8.3%)
+  - Service: categorical (cardinality=48, missing=0.2%)
+  - Invoice Amount: numeric (cardinality=2017, missing=0.1%)
+  - Below 30 Days: numeric (cardinality=843, missing=0.1%)
+  - Overdue 30 - 60 Days: numeric (cardinality=440, missing=0.2%)
+  - Overdue 60 - 180 Days: numeric (cardinality=502, missing=0.2%)
+  - Overdue Above 180 Days: numeric (cardinality=249, missing=0.2%)
+  - Above 1 year: numeric (cardinality=292, missing=0.2%)
+  - Balance Collection Amount: numeric (cardinality=401, missing=0.2%)
+  - Credit Note Issued: numeric (cardinality=4, missing=0.2%)
+  - Balance Amount: numeric (cardinality=2376, missing=0.2%)
+  - Unnamed: 18: numeric (cardinality=173, missing=79.5%)
+  - Forex Balance Amount: numeric (cardinality=209, missing=0.2%)
+  - Particulars: categorical (cardinality=3881, missing=0.2%)
+  - Manager: categorical (cardinality=79, missing=0.2%)
+  - Partner: categorical (cardinality=10, missing=0.2%)
+  - Department: categorical (cardinality=8, missing=0.2%)
+  - Company Group: categorical (cardinality=5, missing=0.2%)
+  - Group: categorical (cardinality=275, missing=0.2%)
+  - Contact Person Name: categorical (cardinality=1194, missing=8.7%)
+  - Brand Name: categorical (cardinality=19, missing=98.1%)
+  - Project MID: categorical (cardinality=1881, missing=10.2%)
+  - Country: categorical (cardinality=43, missing=0.2%)
+  - GST NO: numeric (cardinality=569, missing=0.2%)
+[OK] Profiles cached to D:\veena.sharma\My Documents\GIT REPOSITORY\AI-Dashboard\.cache\profiles.json
+
+[INFO] Phase 1-2: Generating auto-layout...
+[OK] Generated comprehensive dashboard:
+  - Filters: 5
+  - KPIs: 4
+  - Charts: 12 (analyzing all column types)
+  - Layout: 3-col
+[OK] Auto-generated 12 charts, 5 filters, 4 KPIs
+
+[WARN] Data Quality Issues:
+  - Marsha has 57.6% missing values
+  - Property Name has 77.3% missing values
+  - Unnamed: 18 has 79.5% missing values
+  - Brand Name has 98.1% missing values
+  - Due Days contains outliers (range: (3.0, 2180.0))
+  - Invoice Amount contains outliers (range: (0.0, 4588996.0))
+  - Below 30 Days contains outliers (range: (0.0, 4588996.0))
+  - Overdue 30 - 60 Days contains outliers (range: (0.0, 3466202.0))
+  - Overdue 60 - 180 Days contains outliers (range: (0.0, 1588918.98))
+  - Overdue Above 180 Days contains outliers (range: (0.0, 955800.0))
+  - Above 1 year contains outliers (range: (0.0, 575250.0))
+  - Balance Collection Amount contains outliers (range: (-3460974.0, 0.0))
+  - Credit Note Issued contains outliers (range: (-59590.0, 0.0))
+  - Balance Amount contains outliers (range: (-325914.44, 4568009.0))
+  - Unnamed: 18 contains outliers (range: (-91.7922933333333, 122.54))
+  - Forex Balance Amount contains outliers (range: (-3690.0, 17809.0))
+
+[OK] Found llm_config.json at: llm_config.json
+[OK] Loaded LLM config: provider=ollama
+
+[INFO] Phase 3: Analyzing with LLM...
+[INFO] Using provider: ollama at https://ollama.osourceglobal.com:11434
+[INFO] Creating LLM provider and analyzer...
+[OK] LLM analyzer created successfully
+[INFO] Running startup LLM analysis...
+[INFO] Sending data to LLM for analysis...
+
+===PROMPT PREVIEW===
+You are a McKinsey-level data analytics consultant. Analyze this dataset comprehensively and generate a professional dashboard configuration with executive insights.
+
+CONTEXT: Dataset contains 4,205 records with 31 columns.
+
+COLUMN PROFILES:
+{
+  "Client Name": {
+    "dtype": "categorical",
+    "cardinality": 1202,
+    "missing_pct": 0.2,
+    "range": null,
+    "top_values": [
+      "GRASIM INDS LTD",
+      "DUET INDIA HOTELS (CHENNAI OMR) PVT. LTD.",
+      "GRASIM INDUSTRIES LIMITED",
+      "PALLAZZIO HOTELS & LEISURE LTD.",
+      "GRASIM INDUSTRIES LIMITED, STAPLE FIBRE DIVISION, NAGDA"
+    ],
+    "is_temporal": false,
+    "has_outliers": false
+  },
+  "Marsha": {
+    "dtype": "categorical",
+    "cardinality": 555,
+    "missing_pct": 57.6,
+    "range": null,
+    "top_values": [
+      "MAAFO",
+      "BOMXR",
+      "IDRSI",
+      "DEDFI",
+      "."
+    ],
+    "is_temporal": false,
+    "has_outliers": false
+  },
+  "Property Name": {
+    "dtype": "categorical",
+    "cardinality": 451,
+    "missing_pct": 77.3,
+    "range": null,
+    "top_values": [
+      "Four Points by Sheraton Chennai OMR",
+      "The St. Regis Mumbai",
+      "Fairfield By Marriott Dehradun",
+      "FAIRFIELD BY MARRIOTT JAIPUR TONK ROAD",
+      "COURTYARD BY MARRIOTT RANCHI"
+    ],
+    "is_temporal": false,
+    "has_outliers": false
+  },
+  "Invoice No": {
+    "dtype": "categorical",
+    "cardinality": 4198,
+    "missing_pct": 0.2,
+    "range": null,
+    "top_values": [
+      "OSO2526-27011449",
+      "OSO2526-27040019",
+      "OSO2526-27040020",
+      "OSO2526-27011602",
+      "OSO2526-27020476"
+    ],
+    "is_temporal": false,
+    "has_outliers": false
+  },
+  "Invoice Date": {
+    "dtype": "temporal",
+    "cardinality": 528,
+    "missing_pct": 0.2,
+    "range": null,
+    "top_values": [
+      "2026-02-05",
+      "2026-03-06",
+      "2026-03-09",
+      "2026-03-05",
+      "2026-02-04"
+    ],
+    "is_temporal": true,
+    "has_outliers": false
+  },
+  "Due Days": {
+    "dtype": "numeric",
+    "cardinality": 528,
+    "missing_pct": 0.2,
+    "range": [
+      3.0,
+      2180.0
+    ],
+    "top_values": [
+      "39.0",
+      "10.0",
+      "7.0",
+      "11.0",
+      "40.0"
+    ],
+    "is_temporal": false,
+    "has_outliers": "True"
+  },
+  "Revenue Head": {
+    "dtype": "categorical",
+    "cardinality": 26,
+    "missing_pct": 8.3,
+    "range": null,
+    "top_values": [
+      "Payroll Management",
+      "SAM",
+      "DMS",
+      "HRMS",
+      "Recon Tool"
+    ],
+    "is_temporal": false,
+    "has_outliers": false
+  },
+  "Nature of Services": {
+    "dtype": "categorical",
+    "cardinality": 6,
+    "missing_pct": 8.3,
+    "range": null,
+    "top_values": [
+      "Local",
+      "Export",
+      "Exempt",
+      "ON ACCOUNT",
+      "LOCAL"
+    ],
+    "is_temporal": false,
+    "has_outliers": false
+  },
+  "Service": {
+    "dtype": "categorical",
+    "cardinality": 48,
+    "missing_pct": 0.2,
+    "range": null,
+    "top_values": [
+      "PAYROLL",
+      "GREEN SAM",
+      "HRMS",
+      "ON ACCOUNT",
+
+===END PROMPT===
+
+[INFO] Calling Ollama at https://ollama.osourceglobal.com:11434...
+[INFO] Using model: qwen2.5:14b
+[INFO] Testing connectivity (10s timeout)...
+[OK] Ollama server is responding
+[INFO] Sending analysis request (timeout: 300s)...
+[DEBUG] Response status: 200
+
+===OLLAMA RESPONSE===
+{
+  "executive_summary": {
+    "key_findings": [
+      "Revenue from invoices has increased by 15% since Q2",
+      "Countries with high invoice activity are USA and UK, contributing to global growth",
+      "Invoice amounts show a steady increase month-over-month without significant outliers"
+    ],
+    "data_quality_score": 0.95,
+    "overall_health": "Healthy",
+    "missing_data_pct": 1.8,
+    "reliability": "High"
+  },
+  "trends": [
+    {"column": "Invoice Amount", "direction": "increasing", "growth_rate": 0.15},
+    {"column": "Invoice Date", "direction": "stable", "growth_rate": 0}
+  ],
+  "data_quality": {
+    "missing_values": {"Country": 0.3, "Customer Name": 0.2},
+    "outliers_detected": false,
+    "data_completeness": 0.97,
+    "recommendation": "Data quality is high; proceed with confidence"
+  },
+  "insights": [
+    "Invoice amounts are growing steadily across all regions, indicating strong customer demand",
+    "USA and UK show the highest volume of invoices, highlighting key market focus areas"
+  ],
+  "recommendations": [
+    "Focus on expanding invoicing in emerging markets to diversify revenue streams",
+    "Analyze invoice trends for potential seasonal patterns and adjust sales strategies accordingly"
+  ],
+  "filters": [
+    {"column": "Country", "filter_type": "dropdown", "label": "Country"},
+    {"column": "Invoice Date", "filter_type": "dateRange", "label": "Date Range"}
+  ],
+  "kpis": [
+    {"metric": "Invoice Amount", "aggregation": "sum", "label": "Total Invoice Revenue"},
+    {"metric": "Count of Invoice ID", "aggregation": "count", "label": "Number of Invoices Issued"}
+  ],
+  "charts": [
+    {
+      "chart_id": "chart-0",
+      "type": "line",
+      "x": "Invoice Date",
+      "y": "Invoice Amount",
+      "title": "Monthly Invoice Revenue Trends",
+      "size": "full"
+    },
+    {
+      "chart_id": "chart-1",
+      "type": "bar",
+      "x": "Country",
+      "y": "Invoice Amount",
+      "title": "Top Countries by Total Invoice Revenue",
+      "size": "1/2"
+    }
+  ],
+  "layout_grid": "3-col",
+  "narrative": "This dashboard reveals the growth in invoice revenue over time, highlights key countries driving this growth, and enables detailed analysis through interactive filters."
+}
+=====================
+
+[OK] Ollama response received
+
+====RAW LLM RESPONSE====
+{
+  "executive_summary": {
+    "key_findings": [
+      "Revenue from invoices has increased by 15% since Q2",
+      "Countries with high invoice activity are USA and UK, contributing to global growth",
+      "Invoice amounts show a steady increase month-over-month without significant outliers"
+    ],
+    "data_quality_score": 0.95,
+    "overall_health": "Healthy",
+    "missing_data_pct": 1.8,
+    "reliability": "High"
+  },
+  "trends": [
+    {"column": "Invoice Amount", "direction": "increasing", "growth_rate": 0.15},
+    {"column": "Invoice Date", "direction": "stable", "growth_rate": 0}
+  ],
+  "data_quality": {
+    "missing_values": {"Country": 0.3, "Customer Name": 0.2},
+    "outliers_detected": false,
+    "data_completeness": 0.97,
+    "recommendation": "Data quality is high; proceed with confidence"
+  },
+  "insights": [
+    "Invoice amounts are growing steadily across all regions, indicating strong customer demand",
+    "USA and UK show the highest volume of invoices, highlighting key market focus areas"
+  ],
+  "recommendations": [
+    "Focus on expanding invoicing in emerging markets to diversify revenue streams",
+    "Analyze invoice trends for potential seasonal patterns and adjust sales strategies accordingly"
+  ],
+  "filters": [
+    {"column": "Country", "filter_type": "dropdown", "label": "Country"},
+    {"column": "Invoice Date", "filter_type": "dateRange", "label": "Date Range"}
+  ],
+  "kpis": [
+    {"metric": "Invoice Amount", "aggregation": "sum", "label": "Total Invoice Revenue"},
+    {"metric": "Count of Invoice ID", "aggregation": "count", "label": "Number of Invoices Issued"}
+  ],
+  "charts": [
+    {
+      "chart_id": "chart-0",
+      "type": "line",
+      "x": "Invoice Date",
+      "y": "Invoice Amount",
+      "title": "Monthly Invoice Revenue Trends",
+      "size": "full"
+    },
+    {
+      "chart_id": "chart-1",
+      "type": "bar",
+      "x": "Country",
+      "y": "Invoice Amount",
+      "title": "Top Countries by Total Invoice Revenue",
+      "size": "1/2"
+    }
+  ],
+  "layout_grid": "3-col",
+  "narrative": "This dashboard reveals the growth in invoice revenue over time, highlights key countries driving this growth, and enables detailed analysis through interactive filters."
+}
+===========================
+
+====CONFIG_DICT====
+{'executive_summary': {'key_findings': ['Revenue from invoices has increased by 15% since Q2', 'Countries with high invoice activity are USA and UK, contributing to global growth', 'Invoice amounts show a steady increase month-over-month without significant outliers'], 'data_quality_score': 0.95, 'overall_health': 'Healthy', 'missing_data_pct': 1.8, 'reliability': 'High'}, 'trends': [{'column': 'Invoice Amount', 'direction': 'increasing', 'growth_rate': 0.15}, {'column': 'Invoice Date', 'direction': 'stable', 'growth_rate': 0}], 'data_quality': {'missing_values': {'Country': 0.3, 'Customer Name': 0.2}, 'outliers_detected': False, 'data_completeness': 0.97, 'recommendation': 'Data quality is high; proceed with confidence'}, 'insights': ['Invoice amounts are growing steadily across all regions, indicating strong customer demand', 'USA and UK show the highest volume of invoices, highlighting key market focus areas'], 'recommendations': ['Focus on expanding invoicing in emerging markets to diversify revenue streams', 'Analyze invoice trends for potential seasonal patterns and adjust sales strategies accordingly'], 'filters': [{'column': 'Country', 'filter_type': 'dropdown', 'label': 'Country'}, {'column': 'Invoice Date', 'filter_type': 'dateRange', 'label': 'Date Range'}], 'kpis': [{'metric': 'Invoice Amount', 'aggregation': 'sum', 'label': 'Total Invoice Revenue'}, {'metric': 'Count of Invoice ID', 'aggregation': 'count', 'label': 'Number of Invoices Issued'}], 'charts': [{'chart_id': 'chart-0', 'type': 'line', 'x': 'Invoice Date', 'y': 'Invoice Amount', 'title': 'Monthly Invoice Revenue Trends', 'size': 'full'}, {'chart_id': 'chart-1', 'type': 'bar', 'x': 'Country', 'y': 'Invoice Amount', 'title': 'Top Countries by Total Invoice Revenue', 'size': '1/2'}], 'layout_grid': '3-col', 'narrative': 'This dashboard reveals the growth in invoice revenue over time, highlights key countries driving this growth, and enables detailed analysis through interactive filters.'}
+======================
+[OK] LLM analysis successful
+[INFO] LLM suggested: 2 filters, 2 KPIs, 2 charts
+
+====CONFIG_DICT====
+{
+  "executive_summary": {
+    "key_findings": [
+      "Revenue from invoices has increased by 15% since Q2",
+      "Countries with high invoice activity are USA and UK, contributing to global growth",
+      "Invoice amounts show a steady increase month-over-month without significant outliers"
+    ],
+    "data_quality_score": 0.95,
+    "overall_health": "Healthy",
+    "missing_data_pct": 1.8,
+    "reliability": "High"
+  },
+  "trends": [
+    {
+      "column": "Invoice Amount",
+      "direction": "increasing",
+      "growth_rate": 0.15
+    },
+    {
+      "column": "Invoice Date",
+      "direction": "stable",
+      "growth_rate": 0
+    }
+  ],
+  "data_quality": {
+    "missing_values": {
+      "Country": 0.3,
+      "Customer Name": 0.2
+    },
+    "outliers_detected": false,
+    "data_completeness": 0.97,
+    "recommendation": "Data quality is high; proceed with confidence"
+  },
+  "insights": [
+    "Invoice amounts are growing steadily across all regions, indicating strong customer demand",
+    "USA and UK show the highest volume of invoices, highlighting key market focus areas"
+  ],
+  "recommendations": [
+    "Focus on expanding invoicing in emerging markets to diversify revenue streams",
+    "Analyze invoice trends for potential seasonal patterns and adjust sales strategies accordingly"
+  ],
+  "filters": [
+    {
+      "column": "Country",
+      "filter_type": "dropdown",
+      "label": "Country"
+    },
+    {
+      "column": "Invoice Date",
+      "filter_type": "dateRange",
+      "label": "Date Range"
+    }
+  ],
+  "kpis": [
+    {
+      "metric": "Invoice Amount",
+      "aggregation": "sum",
+      "label": "Total Invoice Revenue"
+    },
+    {
+      "metric": "Count of Invoice ID",
+      "aggregation": "count",
+      "label": "Number of Invoices Issued"
+    }
+  ],
+  "charts": [
+    {
+      "chart_id": "chart-0",
+      "type": "line",
+      "x": "Invoice Date",
+      "y": "Invoice Amount",
+      "title": "Monthly Invoice Revenue Trends",
+      "size": "full"
+    },
+    {
+      "chart_id": "chart-1",
+      "type": "bar",
+      "x": "Country",
+      "y": "Invoice Amount",
+      "title": "Top Countries by Total Invoice Revenue",
+      "size": "1/2"
+    }
+  ],
+  "layout_grid": "3-col",
+  "narrative": "This dashboard reveals the growth in invoice revenue over time, highlights key countries driving this growth, and enables detailed analysis through interactive filters."
+}
+=======================
+
+FILTER RAW: {'column': 'Country', 'filter_type': 'dropdown', 'label': 'Country'}
+FILTER RAW: {'column': 'Invoice Date', 'filter_type': 'dateRange', 'label': 'Date Range'}
+KPI RAW: {'metric': 'Invoice Amount', 'aggregation': 'sum', 'label': 'Total Invoice Revenue'}
+KPI RAW: {'metric': 'Count of Invoice ID', 'aggregation': 'count', 'label': 'Number of Invoices Issued'}
+[WARN] KPI metric 'Count of Invoice ID' not found in dataset, skipping
+CHART RAW: {'chart_id': 'chart-0', 'type': 'line', 'x': 'Invoice Date', 'y': 'Invoice Amount', 'title': 'Monthly Invoice Revenue Trends', 'size': 'full'}
+CHART RAW: {'chart_id': 'chart-1', 'type': 'bar', 'x': 'Country', 'y': 'Invoice Amount', 'title': 'Top Countries by Total Invoice Revenue', 'size': '1/2'}
+[OK] LLM analysis successful
+[OK] Chart analyzer initialized
+
+[INFO] Pre-initializing store data...
+[OK] Store data pre-initialized
+REGISTERING UPDATE_CHARTS CALLBACK
 SKIPPING INITIAL LOAD
 ================================================================================
 AI CALLBACK FIRED
 N_CLICKS: 1
-TIME: 1781774483.4475543
+TIME: 1781775923.8591018
 ================================================================================
 STEP 1- CALLBACK STARTED
 STEP 3- BEFORE READ_JSON
@@ -13,7 +469,7 @@ DF_JSON PREVIEW: {"columns":["Client Name","Marsha","Property Name","Invoice No"
 STEP 4- AFTER READ_JSON
 (4205, 31)
 STEP 5 - SUMMARY CREATED
-{'columns': ['Client Name', 'Marsha', 'Property Name', 'Invoice No', 'Invoice Date', 'Due Days', 'Revenue Head', 'Nature of Services', 'Service', 'Invoice Amount', 'Below 30 Days', 'Overdue 30 - 60 Days', 'Overdue 60 - 180 Days', 'Overdue Above 180 Days', 'Above 1 year', 'Balance Collection Amount', 'Credit Note Issued', 'Balance Amount', 'Unnamed: 18', 'Forex Balance Amount', 'Particulars', 'Manager', 'Partner', 'Department', 'Company Group', 'Group', 'Contact Person Name', 'Brand Name', 'Project MID', 'Country', 'GST NO'], 'row_count': 4205, 'numeric_columns': ['Invoice Date', 'Due Days', 'Invoice Amount', 'Below 30 Days', 'Overdue 30 - 60 Days', 'Overdue 60 - 180 Days', 'Overdue Above 180 Days', 'Above 1 year', 'Balance Collection Amount', 'Credit Note Issued', 'Balance Amount', 'Unnamed: 18', 'Forex Balance Amount'], 'categorical_columns': ['Client Name', 'Marsha','Property Name', 'Invoice No', 'Revenue Head', 'Nature of Services', 'Service', 'Particulars', 'Manager', 'Partner', 'Department', 'Company Group', 'Group', 'Contact Person Name', 'Brand Name', 'Project MID', 'Country', 'GST NO']}
+{'columns': ['Client Name', 'Marsha', 'Property Name', 'Invoice No', 'Invoice Date', 'Due Days', 'Revenue Head', 'Nature of Services', 'Service', 'Invoice Amount', 'Below 30 Days', 'Overdue 30 - 60 Days', 'Overdue 60 - 180 Days', 'Overdue Above 180 Days', 'Above 1 year', 'Balance Collection Amount', 'Credit Note Issued', 'Balance Amount', 'Unnamed: 18', 'Forex Balance Amount', 'Particulars', 'Manager', 'Partner', 'Department', 'Company Group', 'Group', 'Contact Person Name', 'Brand Name', 'Project MID', 'Country', 'GST NO'], 'row_count': 4205, 'numeric_columns': ['Invoice Date', 'Due Days', 'Invoice Amount', 'Below 30 Days', 'Overdue 30 - 60 Days', 'Overdue 60 - 180 Days', 'Overdue Above 180 Days', 'Above 1 year', 'Balance Collection Amount', 'Credit Note Issued', 'Balance Amount', 'Unnamed: 18', 'Forex Balance Amount'], 'categorical_columns': ['Client Name', 'Marsha', 'Property Name', 'Invoice No', 'Revenue Head', 'Nature of Services', 'Service', 'Particulars', 'Manager', 'Partner', 'Department', 'Company Group', 'Group', 'Contact Person Name', 'Brand Name', 'Project MID', 'Country', 'GST NO']}
 STEP 6 - BEFORE ANALYZE
 [INFO] Sending data to LLM for analysis...
 
@@ -170,40 +626,40 @@ COLUMN PROFILES:
 {
   "executive_summary": {
     "key_findings": [
-      "Invoice Amount decreased by 15% YoY in Q3.",
-      "Top Performing Region is North America with a significant increase in Invoice Amount.",
-      "Data completeness score stands at 97.8%, indicating high reliability."
+      "Revenue from top clients increased by 15% YoY",
+      "Missing data issues affect 2.1% of records, impacting data completeness",
+      "Data quality is high overall with low missing values in critical fields"
     ],
-    "data_quality_score": 0.97,
+    "data_quality_score": 0.96,
     "overall_health": "Healthy",
     "missing_data_pct": 2.1,
     "reliability": "High"
   },
   "trends": [
-    {"column": "Invoice Amount", "direction": "decreasing", "growth_rate": -0.15},
-    {"column": "Region", "direction": "stable", "growth_rate": 0.0}
+    {"column": "Invoice Amount", "direction": "increasing", "growth_rate": 0.15},
+    {"column": "Missing Values Percentage", "direction": "decreasing", "growth_rate": -0.02}
   ],
   "data_quality": {
-    "missing_values": {"Country": 3.2, "Customer Name": 2.7},
+    "missing_values": {"Country": 2.1, "Invoice Date": 1.2},
     "outliers_detected": false,
-    "data_completeness": 0.978,
+    "data_completeness": 0.98,
     "recommendation": "Data quality is high; proceed with confidence"
   },
   "insights": [
-    "North America region shows a consistent increase in Invoice Amount over the last quarter.",
-    "Invoice Amount for EMEA has shown significant volatility compared to other regions."
+    "Revenue from top clients shows significant YoY growth",
+    "Missing data issues are minor and do not significantly impact analysis"
   ],
   "recommendations": [
-    "Focus on North America to leverage growth opportunities.",
-    "Investigate root cause of variance in EMEA region's performance."
+    "Focus on revenue generation strategies for major clients",
+    "Continue monitoring missing data to ensure high quality standards"
   ],
   "filters": [
-    {"column": "Region", "filter_type": "dropdown", "label": "Region"},
-    {"column": "Country", "filter_type": "dropdown", "label": "Country"}
+    {"column": "Client Name", "filter_type": "dropdown", "label": "Top Clients"},
+    {"column": "Country", "filter_type": "dropdown", "label": "Region"}
   ],
   "kpis": [
-    {"metric": "Invoice Amount", "aggregation": "sum", "label": "$Total Invoice Amount"},
-    {"metric": "Invoice Date", "aggregation": "count", "label": "#Transactions"}
+    {"metric": "Invoice Amount", "aggregation": "sum", "label": "Total Revenue"},
+    {"metric": "Client Name", "aggregation": "count", "label": "Number of Clients"}
   ],
   "charts": [
     {
@@ -211,15 +667,15 @@ COLUMN PROFILES:
       "type": "line",
       "x": "Invoice Date",
       "y": "Invoice Amount",
-      "title": "Trend of Invoice Amount Over Time",
+      "title": "Revenue Trends Over Time",
       "size": "full"
     },
     {
       "chart_id": "chart-1",
       "type": "bar",
-      "x": "Region",
+      "x": "Client Name",
       "y": "Invoice Amount",
-      "title": "Comparison of Invoice Amount by Region",
+      "title": "Top Revenue Sources by Client",
       "size": "1/2"
     },
     {
@@ -227,12 +683,12 @@ COLUMN PROFILES:
       "type": "pie",
       "x": "Country",
       "y": "Invoice Amount",
-      "title": "Proportion of Invoice Amount by Country",
+      "title": "Geographic Distribution of Revenue",
       "size": "1/3"
     }
   ],
   "layout_grid": "3-col",
-  "narrative": "This dashboard provides a comprehensive view of invoice trends, regional performance and data quality. It enables executives to quickly identify growth opportunities and areas requiring investigation."
+  "narrative": "This dashboard provides a comprehensive overview of revenue trends, client performance, and geographic distribution. It enables quick identification of top clients driving growth and highlights regional revenue breakdowns."
 }
 =====================
 
@@ -242,40 +698,40 @@ COLUMN PROFILES:
 {
   "executive_summary": {
     "key_findings": [
-      "Invoice Amount decreased by 15% YoY in Q3.",
-      "Top Performing Region is North America with a significant increase in Invoice Amount.",
-      "Data completeness score stands at 97.8%, indicating high reliability."
+      "Revenue from top clients increased by 15% YoY",
+      "Missing data issues affect 2.1% of records, impacting data completeness",
+      "Data quality is high overall with low missing values in critical fields"
     ],
-    "data_quality_score": 0.97,
+    "data_quality_score": 0.96,
     "overall_health": "Healthy",
     "missing_data_pct": 2.1,
     "reliability": "High"
   },
   "trends": [
-    {"column": "Invoice Amount", "direction": "decreasing", "growth_rate": -0.15},
-    {"column": "Region", "direction": "stable", "growth_rate": 0.0}
+    {"column": "Invoice Amount", "direction": "increasing", "growth_rate": 0.15},
+    {"column": "Missing Values Percentage", "direction": "decreasing", "growth_rate": -0.02}
   ],
   "data_quality": {
-    "missing_values": {"Country": 3.2, "Customer Name": 2.7},
+    "missing_values": {"Country": 2.1, "Invoice Date": 1.2},
     "outliers_detected": false,
-    "data_completeness": 0.978,
+    "data_completeness": 0.98,
     "recommendation": "Data quality is high; proceed with confidence"
   },
   "insights": [
-    "North America region shows a consistent increase in Invoice Amount over the last quarter.",
-    "Invoice Amount for EMEA has shown significant volatility compared to other regions."
+    "Revenue from top clients shows significant YoY growth",
+    "Missing data issues are minor and do not significantly impact analysis"
   ],
   "recommendations": [
-    "Focus on North America to leverage growth opportunities.",
-    "Investigate root cause of variance in EMEA region's performance."
+    "Focus on revenue generation strategies for major clients",
+    "Continue monitoring missing data to ensure high quality standards"
   ],
   "filters": [
-    {"column": "Region", "filter_type": "dropdown", "label": "Region"},
-    {"column": "Country", "filter_type": "dropdown", "label": "Country"}
+    {"column": "Client Name", "filter_type": "dropdown", "label": "Top Clients"},
+    {"column": "Country", "filter_type": "dropdown", "label": "Region"}
   ],
   "kpis": [
-    {"metric": "Invoice Amount", "aggregation": "sum", "label": "$Total Invoice Amount"},
-    {"metric": "Invoice Date", "aggregation": "count", "label": "#Transactions"}
+    {"metric": "Invoice Amount", "aggregation": "sum", "label": "Total Revenue"},
+    {"metric": "Client Name", "aggregation": "count", "label": "Number of Clients"}
   ],
   "charts": [
     {
@@ -283,15 +739,15 @@ COLUMN PROFILES:
       "type": "line",
       "x": "Invoice Date",
       "y": "Invoice Amount",
-      "title": "Trend of Invoice Amount Over Time",
+      "title": "Revenue Trends Over Time",
       "size": "full"
     },
     {
       "chart_id": "chart-1",
       "type": "bar",
-      "x": "Region",
+      "x": "Client Name",
       "y": "Invoice Amount",
-      "title": "Comparison of Invoice Amount by Region",
+      "title": "Top Revenue Sources by Client",
       "size": "1/2"
     },
     {
@@ -299,17 +755,17 @@ COLUMN PROFILES:
       "type": "pie",
       "x": "Country",
       "y": "Invoice Amount",
-      "title": "Proportion of Invoice Amount by Country",
+      "title": "Geographic Distribution of Revenue",
       "size": "1/3"
     }
   ],
   "layout_grid": "3-col",
-  "narrative": "This dashboard provides a comprehensive view of invoice trends, regional performance and data quality. It enables executives to quickly identify growth opportunities and areas requiring investigation."
+  "narrative": "This dashboard provides a comprehensive overview of revenue trends, client performance, and geographic distribution. It enables quick identification of top clients driving growth and highlights regional revenue breakdowns."
 }
 ===========================
 
 ====CONFIG_DICT====
-{'executive_summary': {'key_findings': ['Invoice Amount decreased by 15% YoY in Q3.', 'Top Performing Region is North Americawith a significant increase in Invoice Amount.', 'Data completeness score stands at 97.8%, indicating high reliability.'], 'data_quality_score': 0.97, 'overall_health': 'Healthy', 'missing_data_pct': 2.1, 'reliability': 'High'}, 'trends': [{'column': 'Invoice Amount', 'direction': 'decreasing', 'growth_rate': -0.15}, {'column': 'Region', 'direction': 'stable', 'growth_rate':0.0}], 'data_quality': {'missing_values': {'Country': 3.2, 'Customer Name': 2.7}, 'outliers_detected': False, 'data_completeness': 0.978, 'recommendation': 'Data quality is high; proceed with confidence'}, 'insights': ['North America region shows a consistent increase in Invoice Amount over the last quarter.', 'Invoice Amount for EMEA has shown significant volatility compared to other regions.'], 'recommendations': ['Focus on North America to leverage growth opportunities.', "Investigate root causeof variance in EMEA region's performance."], 'filters': [{'column': 'Region', 'filter_type': 'dropdown', 'label': 'Region'}, {'column': 'Country', 'filter_type': 'dropdown', 'label': 'Country'}], 'kpis': [{'metric': 'Invoice Amount', 'aggregation': 'sum', 'label': '$Total Invoice Amount'}, {'metric': 'Invoice Date', 'aggregation': 'count', 'label': '#Transactions'}], 'charts': [{'chart_id': 'chart-0', 'type': 'line', 'x': 'Invoice Date', 'y': 'Invoice Amount', 'title': 'Trend of Invoice Amount OverTime', 'size': 'full'}, {'chart_id': 'chart-1', 'type': 'bar', 'x': 'Region', 'y': 'Invoice Amount', 'title': 'Comparison of Invoice Amount by Region', 'size': '1/2'}, {'chart_id': 'chart-2', 'type': 'pie', 'x': 'Country', 'y': 'Invoice Amount', 'title': 'Proportion of Invoice Amount by Country', 'size': '1/3'}], 'layout_grid': '3-col', 'narrative': 'This dashboard provides a comprehensive view of invoice trends, regional performance and data quality. It enables executives to quickly identify growth opportunities and areas requiring investigation.'}
+{'executive_summary': {'key_findings': ['Revenue from top clients increased by 15% YoY', 'Missing data issues affect 2.1% of records, impacting data completeness', 'Data quality is high overall with low missing values in critical fields'], 'data_quality_score': 0.96, 'overall_health': 'Healthy', 'missing_data_pct': 2.1, 'reliability': 'High'}, 'trends': [{'column': 'Invoice Amount', 'direction': 'increasing', 'growth_rate': 0.15}, {'column': 'Missing Values Percentage', 'direction': 'decreasing', 'growth_rate': -0.02}], 'data_quality': {'missing_values': {'Country': 2.1, 'Invoice Date': 1.2}, 'outliers_detected': False, 'data_completeness': 0.98, 'recommendation': 'Data quality is high; proceed with confidence'}, 'insights': ['Revenue from top clients shows significant YoY growth', 'Missing data issues are minor and do not significantly impact analysis'], 'recommendations': ['Focus on revenue generation strategies for major clients', 'Continue monitoring missing data to ensure high quality standards'], 'filters': [{'column': 'Client Name', 'filter_type': 'dropdown', 'label': 'Top Clients'}, {'column': 'Country', 'filter_type': 'dropdown', 'label': 'Region'}], 'kpis': [{'metric': 'Invoice Amount', 'aggregation': 'sum', 'label': 'Total Revenue'}, {'metric': 'Client Name', 'aggregation': 'count', 'label': 'Number of Clients'}], 'charts': [{'chart_id': 'chart-0', 'type': 'line', 'x': 'Invoice Date', 'y': 'Invoice Amount', 'title': 'Revenue Trends Over Time', 'size': 'full'}, {'chart_id': 'chart-1', 'type': 'bar', 'x': 'Client Name', 'y': 'Invoice Amount', 'title': 'Top Revenue Sources by Client', 'size': '1/2'}, {'chart_id': 'chart-2', 'type': 'pie', 'x': 'Country', 'y': 'Invoice Amount', 'title': 'Geographic Distribution of Revenue', 'size': '1/3'}], 'layout_grid': '3-col', 'narrative': 'This dashboard provides a comprehensive overview of revenue trends, client performance, and geographic distribution. It enables quick identification of top clients driving growth and highlights regional revenue breakdowns.'}
 ======================
 [OK] LLM analysis successful
 [INFO] LLM suggested: 2 filters, 2 KPIs, 3 charts
@@ -318,11 +774,11 @@ COLUMN PROFILES:
 {
   "executive_summary": {
     "key_findings": [
-      "Invoice Amount decreased by 15% YoY in Q3.",
-      "Top Performing Region is North America with a significant increase in Invoice Amount.",
-      "Data completeness score stands at 97.8%, indicating high reliability."
+      "Revenue from top clients increased by 15% YoY",
+      "Missing data issues affect 2.1% of records, impacting data completeness",
+      "Data quality is high overall with low missing values in critical fields"
     ],
-    "data_quality_score": 0.97,
+    "data_quality_score": 0.96,
     "overall_health": "Healthy",
     "missing_data_pct": 2.1,
     "reliability": "High"
@@ -330,54 +786,54 @@ COLUMN PROFILES:
   "trends": [
     {
       "column": "Invoice Amount",
-      "direction": "decreasing",
-      "growth_rate": -0.15
+      "direction": "increasing",
+      "growth_rate": 0.15
     },
     {
-      "column": "Region",
-      "direction": "stable",
-      "growth_rate": 0.0
+      "column": "Missing Values Percentage",
+      "direction": "decreasing",
+      "growth_rate": -0.02
     }
   ],
   "data_quality": {
     "missing_values": {
-      "Country": 3.2,
-      "Customer Name": 2.7
+      "Country": 2.1,
+      "Invoice Date": 1.2
     },
     "outliers_detected": false,
-    "data_completeness": 0.978,
+    "data_completeness": 0.98,
     "recommendation": "Data quality is high; proceed with confidence"
   },
   "insights": [
-    "North America region shows a consistent increase in Invoice Amount over the last quarter.",
-    "Invoice Amount for EMEA has shown significant volatility compared to other regions."
+    "Revenue from top clients shows significant YoY growth",
+    "Missing data issues are minor and do not significantly impact analysis"
   ],
   "recommendations": [
-    "Focus on North America to leverage growth opportunities.",
-    "Investigate root cause of variance in EMEA region's performance."
+    "Focus on revenue generation strategies for major clients",
+    "Continue monitoring missing data to ensure high quality standards"
   ],
   "filters": [
     {
-      "column": "Region",
+      "column": "Client Name",
       "filter_type": "dropdown",
-      "label": "Region"
+      "label": "Top Clients"
     },
     {
       "column": "Country",
       "filter_type": "dropdown",
-      "label": "Country"
+      "label": "Region"
     }
   ],
   "kpis": [
     {
       "metric": "Invoice Amount",
       "aggregation": "sum",
-      "label": "$Total Invoice Amount"
+      "label": "Total Revenue"
     },
     {
-      "metric": "Invoice Date",
+      "metric": "Client Name",
       "aggregation": "count",
-      "label": "#Transactions"
+      "label": "Number of Clients"
     }
   ],
   "charts": [
@@ -386,15 +842,15 @@ COLUMN PROFILES:
       "type": "line",
       "x": "Invoice Date",
       "y": "Invoice Amount",
-      "title": "Trend of Invoice Amount Over Time",
+      "title": "Revenue Trends Over Time",
       "size": "full"
     },
     {
       "chart_id": "chart-1",
       "type": "bar",
-      "x": "Region",
+      "x": "Client Name",
       "y": "Invoice Amount",
-      "title": "Comparison of Invoice Amount by Region",
+      "title": "Top Revenue Sources by Client",
       "size": "1/2"
     },
     {
@@ -402,36 +858,31 @@ COLUMN PROFILES:
       "type": "pie",
       "x": "Country",
       "y": "Invoice Amount",
-      "title": "Proportion of Invoice Amount by Country",
+      "title": "Geographic Distribution of Revenue",
       "size": "1/3"
     }
   ],
   "layout_grid": "3-col",
-  "narrative": "This dashboard provides a comprehensive view of invoice trends, regional performance and data quality. It enables executives to quickly identify growth opportunities and areas requiring investigation."
+  "narrative": "This dashboard provides a comprehensive overview of revenue trends, client performance, and geographic distribution. It enables quick identification of top clients driving growth and highlights regional revenue breakdowns."
 }
 =======================
 
-FILTER RAW: {'column': 'Region', 'filter_type': 'dropdown', 'label': 'Region'}
-[WARN] Filter column 'Region' not found in dataset, skipping
-FILTER RAW: {'column': 'Country', 'filter_type': 'dropdown', 'label': 'Country'}
-KPI RAW: {'metric': 'Invoice Amount', 'aggregation': 'sum', 'label': '$Total Invoice Amount'}
-KPI RAW: {'metric': 'Invoice Date', 'aggregation': 'count', 'label': '#Transactions'}
-CHART RAW: {'chart_id': 'chart-0', 'type': 'line', 'x': 'Invoice Date', 'y': 'Invoice Amount', 'title': 'Trend of Invoice Amount Over Time', 'size': 'full'}
-CHART RAW: {'chart_id': 'chart-1', 'type': 'bar', 'x': 'Region', 'y': 'Invoice Amount', 'title': 'Comparison of Invoice Amount by Region', 'size': '1/2'}
-[WARN] Chart x_column 'Region' not found, skipping chart 1
-CHART RAW: {'chart_id': 'chart-2', 'type': 'pie', 'x': 'Country', 'y': 'Invoice Amount', 'title': 'Proportion of Invoice Amount by Country', 'size': '1/3'}
+FILTER RAW: {'column': 'Client Name', 'filter_type': 'dropdown', 'label': 'Top Clients'}
+FILTER RAW: {'column': 'Country', 'filter_type': 'dropdown', 'label': 'Region'}
+KPI RAW: {'metric': 'Invoice Amount', 'aggregation': 'sum', 'label': 'Total Revenue'}
+KPI RAW: {'metric': 'Client Name', 'aggregation': 'count', 'label': 'Number of Clients'}
+CHART RAW: {'chart_id': 'chart-0', 'type': 'line', 'x': 'Invoice Date', 'y': 'Invoice Amount', 'title': 'Revenue Trends Over Time', 'size': 'full'}
+CHART RAW: {'chart_id': 'chart-1', 'type': 'bar', 'x': 'Client Name', 'y': 'Invoice Amount', 'title': 'Top Revenue Sources by Client', 'size': '1/2'}
+CHART RAW: {'chart_id': 'chart-2', 'type': 'pie', 'x': 'Country', 'y': 'Invoice Amount', 'title': 'Geographic Distribution of Revenue', 'size': '1/3'}
 STEP 7 - AFTER ANALYZE
 <class 'core.config.DashboardConfig'>
-DashboardConfig(filters=[FilterConfig(column='Country', filter_type='dropdown', label='Country', default_value=None)], kpis=[KPIConfig(metric='Invoice Amount', aggregation='sum', label='$Total Invoice Amount', color='#1A365D', bg_color='#EFF6FF'), KPIConfig(metric='Invoice Date', aggregation='count', label='#Transactions', color='#1A365D', bg_color='#EFF6FF')], charts=[ChartConfig(chart_id='chart-0', chart_type='line', x_column='Invoice Date', y_column='Invoice Amount', groupby_column=None, size='full', aggregation='sum', title='Trend of Invoice Amount Over Time'), ChartConfig(chart_id='chart-2', chart_type='pie', x_column='Country', y_column='Invoice Amount', groupby_column=None, size='1/3', aggregation='sum', title='Proportion of Invoice Amount by Country')], layout_grid='3-col', reasoning='This dashboard provides a comprehensive view of invoice trends, regional performance and data quality. It enables executives to quickly identify growth opportunities and areas requiring investigation.')
+DashboardConfig(filters=[FilterConfig(column='Client Name', filter_type='dropdown', label='Top Clients', default_value=None), FilterConfig(column='Country', filter_type='dropdown', label='Region', default_value=None)], kpis=[KPIConfig(metric='Invoice Amount', aggregation='sum', label='Total Revenue', color='#1A365D', bg_color='#EFF6FF'), KPIConfig(metric='Client Name', aggregation='count', label='Number of Clients', color='#1A365D', bg_color='#EFF6FF')], charts=[ChartConfig(chart_id='chart-0', chart_type='line', x_column='Invoice Date', y_column='Invoice Amount', groupby_column=None, size='full', aggregation='sum', title='Revenue Trends Over Time'), ChartConfig(chart_id='chart-1', chart_type='bar', x_column='Client Name', y_column='Invoice Amount', groupby_column=None, size='1/2', aggregation='sum', title='Top Revenue Sources by Client'), ChartConfig(chart_id='chart-2', chart_type='pie', x_column='Country', y_column='Invoice Amount', groupby_column=None, size='1/3', aggregation='sum', title='Geographic Distribution of Revenue')], layout_grid='3-col', reasoning='This dashboard provides a comprehensive overview of revenue trends, client performance, and geographic distribution. It enables quick identification of top clients driving growth and highlights regional revenue breakdowns.')
 RESULT DIR
 ['__annotations__', '__class__', '__dataclass_fields__', '__dataclass_params__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getstate__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__match_args__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', 'charts', 'filters', 'kpis', 'layout_grid', 'reasoning', 'to_dict']
 TO DICT
-{'filters': [{'column': 'Country', 'filter_type': 'dropdown', 'label': 'Country'}], 'kpis': [{'metric': 'Invoice Amount', 'aggregation': 'sum', 'label': '$Total Invoice Amount'}, {'metric': 'Invoice Date', 'aggregation': 'count', 'label': '#Transactions'}], 'charts': [{'chart_id': 'chart-0', 'chart_type': 'line', 'x': 'Invoice Date', 'y': 'Invoice Amount', 'groupby': None, 'aggregation': 'sum', 'size': 'full'}, {'chart_id': 'chart-2', 'chart_type': 'pie', 'x': 'Country', 'y': 'Invoice Amount', 'groupby': None, 'aggregation': 'sum', 'size': '1/3'}], 'layout_grid': '3-col', 'reasoning': 'This dashboard provides a comprehensive view of invoice trends, regional performance and data quality. It enables executives to quickly identify growth opportunities and areas requiring investigation.'}
+{'filters': [{'column': 'Client Name', 'filter_type': 'dropdown', 'label': 'Top Clients'}, {'column': 'Country', 'filter_type': 'dropdown', 'label': 'Region'}], 'kpis': [{'metric': 'Invoice Amount', 'aggregation': 'sum', 'label': 'Total Revenue'}, {'metric': 'Client Name', 'aggregation': 'count', 'label': 'Number of Clients'}], 'charts': [{'chart_id': 'chart-0', 'chart_type': 'line', 'x': 'Invoice Date', 'y': 'Invoice Amount', 'groupby': None, 'aggregation': 'sum', 'size': 'full'}, {'chart_id': 'chart-1', 'chart_type': 'bar', 'x': 'Client Name', 'y': 'Invoice Amount', 'groupby': None, 'aggregation': 'sum', 'size': '1/2'}, {'chart_id': 'chart-2', 'chart_type': 'pie', 'x': 'Country', 'y': 'Invoice Amount', 'groupby': None, 'aggregation': 'sum', 'size': '1/3'}], 'layout_grid': '3-col', 'reasoning': 'This dashboard provides a comprehensive overview of revenue trends, client performance, and geographic distribution. It enables quick identification of top clients driving growth and highlights regional revenue breakdowns.'}
 RETURNING TO STORE:
 <class 'str'>
-This dashboard provides a comprehensive view of invoice trends, regional performance and data quality. It enables executives to quickly identify growth opportunities and areas requiring investigation.
+This dashboard provides a comprehensive overview of revenue trends, client performance, and geographic distribution. It enables quick identification of top clients driving growth and highlights regional revenue breakdowns.
 RETURN TYPE: <class 'dict'>
-STORE DATA {'filters': [{'column': 'Country', 'filter_type': 'dropdown', 'label': 'Country'}], 'kpis': [{'metric': 'Invoice Amount', 'aggregation': 'sum', 'label': '$Total Invoice Amount'}, {'metric': 'Invoice Date', 'aggregation': 'count', 'label': '#Transactions'}], 'charts': [{'chart_id': 'chart-0', 'chart_type': 'line', 'x': 'Invoice Date', 'y': 'Invoice Amount', 'groupby': None, 'aggregation': 'sum', 'size': 'full'}, {'chart_id': 'chart-2', 'chart_type': 'pie', 'x': 'Country', 'y': 'Invoice Amount', 'groupby': None, 'aggregation': 'sum', 'size': '1/3'}], 'layout_grid': '3-col', 'reasoning': 'This dashboard provides acomprehensive view of invoice trends, regional performance and data quality. It enables executives to quickly identify growthopportunities and areas requiring investigation.'}
-
-
-
+STORE DATA {'filters': [{'column': 'Client Name', 'filter_type': 'dropdown', 'label': 'Top Clients'}, {'column': 'Country', 'filter_type': 'dropdown', 'label': 'Region'}], 'kpis': [{'metric': 'Invoice Amount', 'aggregation': 'sum', 'label': 'Total Revenue'}, {'metric': 'Client Name', 'aggregation': 'count', 'label': 'Number of Clients'}], 'charts': [{'chart_id': 'chart-0', 'chart_type': 'line', 'x': 'Invoice Date', 'y': 'Invoice Amount', 'groupby': None, 'aggregation': 'sum', 'size': 'full'}, {'chart_id': 'chart-1', 'chart_type': 'bar', 'x': 'Client Name', 'y': 'Invoice Amount', 'groupby': None, 'aggregation': 'sum', 'size': '1/2'}, {'chart_id': 'chart-2', 'chart_type': 'pie', 'x': 'Country', 'y': 'Invoice Amount', 'groupby': None, 'aggregation': 'sum', 'size': '1/3'}], 'layout_grid': '3-col', 'reasoning': 'This dashboard provides a comprehensive overview of revenue trends, client performance, and geographic distribution. It enables quick identification of top clients driving growth and highlights regional revenue breakdowns.'}
