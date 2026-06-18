@@ -584,36 +584,22 @@ def register_dashboard_callbacks(app, get_cached_df=None, chart_analyzer=None):
     print("REGISTERING UPDATE_CHARTS CALLBACK")
     
     # Callback to render charts - uses AI suggestions when available, else auto-generates
-    # @app.callback(
-    #     Output('charts-container', 'children'),
-    #     [Input({'type': 'filter-dropdown', 'index': ALL}, 'value'),
-    #     Input('store-ai-suggestions', 'data')],
-    #     [State('store-filter-selections-dashboard', 'data')],
-    #     prevent_initial_call=False
-    # )
     
-    print("FILE LOADED - BEFORE CALLBACK")
     @app.callback(
         Output('charts-container', 'children'),
-        Input('store-ai-suggestions', 'data'),
+        [Input({'type': 'filter-dropdown', 'index': ALL}, 'value'),
+        Input('store-ai-suggestions', 'data')],
+        [State('store-filter-selections-dashboard', 'data')],
         prevent_initial_call=False
     )
-    
-    def update_charts(ai_suggestions):
+
+
+    def update_charts(filter_values, ai_suggestions, filter_selections):
         
         print("=" *80)
         print("UPDATE_CHARTS FIRED")
         print("AI_SUGGESTIONS TYPE:", type(ai_suggestions))
         print("AI_SUGGESTIONS VALUE:", ai_suggestions)
-        return []
-    
-
-    # def update_charts(filter_values, ai_suggestions, filter_selections):
-        
-    #     print("=" *80)
-    #     print("UPDATE_CHARTS FIRED")
-    #     print("AI_SUGGESTIONS TYPE:", type(ai_suggestions))
-    #     print("AI_SUGGESTIONS VALUE:", ai_suggestions)
             
         """Render AI-suggested charts when available, else auto-generate from data."""
         import plotly.graph_objects as go
