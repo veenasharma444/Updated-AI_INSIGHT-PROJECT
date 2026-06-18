@@ -1,77 +1,402 @@
-print("PAGE_CONFIG LOADED")
-@callback(
-    Output('ai-analysis-results', 'children'),
-    Output('store-ai-suggestions', 'data'),
-    Input('btn-analyze-ai', 'n_clicks'),
-    State('store-global-dataframe', 'data'),
-    State('store-global-profiles', 'data'),
-    State('store-objective', 'data'),
-    prevent_initial_call=True
-)
+[OK] Login success: veenash
+[OK] Upload saved: 20260618-125655-48d6a3d3 (4,205 rows)
+SKIPPING INITIAL LOAD
+================================================================================
+AI CALLBACK FIRED
+N_CLICKS: 1
+TIME: 1781767644.5402489
+================================================================================
+STEP 1- CALLBACK STARTED
+STEP 3- BEFORE READ_JSON
+DF_JSON TYPE: <class 'str'>
+DF_JSON PREVIEW: {"columns":["Client Name","Marsha","Property Name","Invoice No","Invoice Date","Due Days","Revenue Head","Nature of Services","Service","Invoice Amount","Below 30 Days","Overdue 30 - 60 Days","Overdue
+STEP 4- AFTER READ_JSON
+(4205, 31)
+STEP 5 - SUMMARY CREATED
+{'columns': ['Client Name', 'Marsha', 'Property Name', 'Invoice No', 'Invoice Date', 'Due Days', 'Revenue Head', 'Nature of Services', 'Service', 'Invoice Amount', 'Below 30 Days', 'Overdue 30 - 60 Days', 'Overdue 60 - 180 Days', 'Overdue Above 180 Days', 'Above 1 year', 'Balance Collection Amount', 'Credit Note Issued', 'Balance Amount', 'Unnamed: 18', 'Forex Balance Amount', 'Particulars', 'Manager', 'Partner', 'Department', 'Company Group', 'Group', 'Contact Person Name', 'Brand Name', 'Project MID', 'Country', 'GST NO'], 'row_count': 4205, 'numeric_columns': ['Invoice Date', 'Due Days', 'Invoice Amount', 'Below 30 Days', 'Overdue 30 - 60 Days', 'Overdue 60 - 180 Days', 'Overdue Above 180 Days', 'Above 1 year', 'Balance Collection Amount', 'Credit Note Issued', 'Balance Amount', 'Unnamed: 18', 'Forex Balance Amount'], 'categorical_columns': ['Client Name', 'Marsha', 'Property Name', 'Invoice No', 'Revenue Head', 'Nature of Services', 'Service', 'Particulars', 'Manager', 'Partner', 'Department', 'Company Group', 'Group', 'Contact Person Name', 'Brand Name', 'Project MID', 'Country', 'GST NO']}
+STEP 6 - BEFORE ANALYZE
+[INFO] Sending data to LLM for analysis...
 
-def run_ai_analysis(n_clicks, df_json, profiles, objective):
-    if not n_clicks:
-        print("SKIPPING INITIAL LOAD")
-        raise PreventUpdate
-    
-    import time
-    print("=" * 80)
-    print("AI CALLBACK FIRED")
-    print("N_CLICKS:", n_clicks)
-    print("TIME:", time.time())
-    print("=" *80)
-    
-    print("STEP 1- CALLBACK STARTED")
-    if not df_json:
-        print("STEP 2- NO DF JSON")
-        return dbc.Alert("No data available", color="warning"), None
-    
-    print("STEP 3- BEFORE READ_JSON")   
-    try:
-        print("DF_JSON TYPE:", type(df_json))
-        print("DF_JSON PREVIEW:", str(df_json)[:200])  # Print the first 200 chars to avoid overload
-        
-        # df = pd.read_json(df_json, orient='split')
-        from io import StringIO
-        df = pd.read_json(StringIO(df_json), orient='split')
-        print("STEP 4- AFTER READ_JSON")
-        print(df.shape)
-        # ✅ LIMIT DATA (CRITICAL)
-        df_sample = df.head(50)
-        summary = {
-            "columns": list(df.columns),
-            "row_count": len(df),
-            "numeric_columns": df.select_dtypes(include='number').columns.tolist(),
-            "categorical_columns": df.select_dtypes(include='object').columns.tolist()
-        }
-        print("STEP 5 - SUMMARY CREATED")
-        print(summary)
-        
-        if llm_analyzer:
-            print("STEP 6 - BEFORE ANALYZE")
-            result = llm_analyzer.analyze(df_sample, profiles, objective or "")
-            print("STEP 7 - AFTER ANALYZE")
-            print(type(result))
-            print(result)
-            
-            return( html.Div([
-                    html.H5("AI Suggestions"),
-                    html.Div(result.reasoning if result else "No suggestions generated", 
-                        style={
-                        'whiteSpace': 'pre-wrap',
-                        'background': '#F7FAFC',
-                        'padding': '10px',
-                        'borderRadius': '6px'
-                    })
-                ]), 
-                    result.reasoning if result else " "
-            )           # Store the result for later use (e.g., in dashboard generation)
-        else:
-            print("STEP X - LLM IS NONE")
-            return dbc.Alert("LLM not initialized", color="danger"), None
-        
-    except Exception as e:
-        print("READ_JSON ERROR")
-        print(type(e).__name__)
-        print(str(e))
-        return dbc.Alert(f"AI Error: {type(e).__name__}: {str(e)}", color="danger"), None
+===PROMPT PREVIEW===
+You are a McKinsey-level data analytics consultant. Analyze this dataset comprehensively and generate a professional dashboard configuration with executive insights.
+
+CONTEXT: No additional context provided
+
+COLUMN PROFILES:
+{
+  "Client Name": {
+    "dtype": "categorical",
+    "cardinality": 1202,
+    "missing_pct": 0.2,
+    "range": null,
+    "top_values": [
+      "GRASIM INDS LTD",
+      "DUET INDIA HOTELS (CHENNAI OMR) PVT. LTD.",
+      "GRASIM INDUSTRIES LIMITED",
+      "PALLAZZIO HOTELS & LEISURE LTD.",
+      "GRASIM INDUSTRIES LIMITED, STAPLE FIBRE DIVISION, NAGDA"
+    ],
+    "is_temporal": false,
+    "has_outliers": false
+  },
+  "Marsha": {
+    "dtype": "categorical",
+    "cardinality": 555,
+    "missing_pct": 57.6,
+    "range": null,
+    "top_values": [
+      "MAAFO",
+      "BOMXR",
+      "IDRSI",
+      "DEDFI",
+      "."
+    ],
+    "is_temporal": false,
+    "has_outliers": false
+  },
+  "Property Name": {
+    "dtype": "categorical",
+    "cardinality": 451,
+    "missing_pct": 77.3,
+    "range": null,
+    "top_values": [
+      "Four Points by Sheraton Chennai OMR",
+      "The St. Regis Mumbai",
+      "Fairfield By Marriott Dehradun",
+      "FAIRFIELD BY MARRIOTT JAIPUR TONK ROAD",
+      "COURTYARD BY MARRIOTT RANCHI"
+    ],
+    "is_temporal": false,
+    "has_outliers": false
+  },
+  "Invoice No": {
+    "dtype": "categorical",
+    "cardinality": 4198,
+    "missing_pct": 0.2,
+    "range": null,
+    "top_values": [
+      "OSO2526-27011449",
+      "OSO2526-27040019",
+      "OSO2526-27040020",
+      "OSO2526-27011602",
+      "OSO2526-27020476"
+    ],
+    "is_temporal": false,
+    "has_outliers": false
+  },
+  "Invoice Date": {
+    "dtype": "temporal",
+    "cardinality": 528,
+    "missing_pct": 0.2,
+    "range": null,
+    "top_values": [
+      "2026-02-05",
+      "2026-03-06",
+      "2026-03-09",
+      "2026-03-05",
+      "2026-02-04"
+    ],
+    "is_temporal": true,
+    "has_outliers": false
+  },
+  "Due Days": {
+    "dtype": "numeric",
+    "cardinality": 528,
+    "missing_pct": 0.2,
+    "range": null,
+    "top_values": [
+      "39.0",
+      "10.0",
+      "7.0",
+      "11.0",
+      "40.0"
+    ],
+    "is_temporal": false,
+    "has_outliers": false
+  },
+  "Revenue Head": {
+    "dtype": "categorical",
+    "cardinality": 26,
+    "missing_pct": 8.3,
+    "range": null,
+    "top_values": [
+      "Payroll Management",
+      "SAM",
+      "DMS",
+      "HRMS",
+      "Recon Tool"
+    ],
+    "is_temporal": false,
+    "has_outliers": false
+  },
+  "Nature of Services": {
+    "dtype": "categorical",
+    "cardinality": 6,
+    "missing_pct": 8.3,
+    "range": null,
+    "top_values": [
+      "Local",
+      "Export",
+      "Exempt",
+      "ON ACCOUNT",
+      "LOCAL"
+    ],
+    "is_temporal": false,
+    "has_outliers": false
+  },
+  "Service": {
+    "dtype": "categorical",
+    "cardinality": 48,
+    "missing_pct": 0.2,
+    "range": null,
+    "top_values": [
+      "PAYROLL",
+      "GREEN SAM",
+      "HRMS",
+      "ON ACCOUNT",
+      "PROJECT TREE"
+    ],
+    "is_temporal"
+===END PROMPT===
+
+[INFO] Calling Ollama at https://ollama.osourceglobal.com:11434...
+[INFO] Using model: qwen2.5:14b
+[INFO] Testing connectivity (10s timeout)...
+[OK] Ollama server is responding
+[INFO] Sending analysis request (timeout: 300s)...
+[DEBUG] Response status: 200
+
+===OLLAMA RESPONSE===
+{
+  "executive_summary": {
+    "key_findings": [
+      "Invoice Amount has increased by 12% YoY, indicating strong revenue growth.",
+      "Missing data in Country column at 3.6%, impacting international sales analysis accuracy.",
+      "Invoice Date shows consistent monthly invoicing pattern without significant seasonal variations."
+    ],
+    "data_quality_score": 0.94,
+    "overall_health": "Healthy",
+    "missing_data_pct": 3.6,
+    "reliability": "High"
+  },
+  "trends": [
+    {"column": "Invoice Amount", "direction": "increasing", "growth_rate": 0.12},
+    {"column": "Invoice Date", "direction": "stable", "growth_rate": 0}
+  ],
+  "data_quality": {
+    "missing_values": {"Country": 3.6, "col_name": 0.5},
+    "outliers_detected": false,
+    "data_completeness": 0.98,
+    "recommendation": "Data quality is high; proceed with confidence"
+  },
+  "insights": [
+    "The consistent invoicing pattern suggests steady business operations throughout the year.",
+    "Growth in Invoice Amount indicates positive business performance."
+  ],
+  "recommendations": [
+    "Focus on expanding international sales to address data completeness issues in Country column.",
+    "Continue monitoring Invoice Amount trends for early indicators of revenue changes."
+  ],
+  "filters": [
+    {"column": "Country", "filter_type": "dropdown", "label": "Country"},
+    {"column": "Invoice Date", "filter_type": "date-range", "label": "Date Range"}
+  ],
+  "kpis": [
+    {"metric": "Invoice Amount", "aggregation": "sum", "label": "$Total Revenue"},
+    {"metric": "count", "aggregation": "count", "label": "Number of Invoices"}
+  ],
+  "charts": [
+    {
+      "chart_id": "chart-0",
+      "type": "line",
+      "x": "Invoice Date",
+      "y": "Invoice Amount",
+      "title": "Monthly Revenue Trends Over Time",
+      "size": "full"
+    },
+    {
+      "chart_id": "chart-1",
+      "type": "bar",
+      "x": "Country",
+      "y": "Invoice Amount",
+      "title": "Revenue by Country",
+      "size": "1/2"
+    }
+  ],
+  "layout_grid": "3-col",
+  "narrative": "This dashboard reveals monthly revenue trends and regional performance, highlighting key insights for executive decision-making."
+}
+=====================
+
+[OK] Ollama response received
+
+====RAW LLM RESPONSE====
+{
+  "executive_summary": {
+    "key_findings": [
+      "Invoice Amount has increased by 12% YoY, indicating strong revenue growth.",
+      "Missing data in Country column at 3.6%, impacting international sales analysis accuracy.",
+      "Invoice Date shows consistent monthly invoicing pattern without significant seasonal variations."
+    ],
+    "data_quality_score": 0.94,
+    "overall_health": "Healthy",
+    "missing_data_pct": 3.6,
+    "reliability": "High"
+  },
+  "trends": [
+    {"column": "Invoice Amount", "direction": "increasing", "growth_rate": 0.12},
+    {"column": "Invoice Date", "direction": "stable", "growth_rate": 0}
+  ],
+  "data_quality": {
+    "missing_values": {"Country": 3.6, "col_name": 0.5},
+    "outliers_detected": false,
+    "data_completeness": 0.98,
+    "recommendation": "Data quality is high; proceed with confidence"
+  },
+  "insights": [
+    "The consistent invoicing pattern suggests steady business operations throughout the year.",
+    "Growth in Invoice Amount indicates positive business performance."
+  ],
+  "recommendations": [
+    "Focus on expanding international sales to address data completeness issues in Country column.",
+    "Continue monitoring Invoice Amount trends for early indicators of revenue changes."
+  ],
+  "filters": [
+    {"column": "Country", "filter_type": "dropdown", "label": "Country"},
+    {"column": "Invoice Date", "filter_type": "date-range", "label": "Date Range"}
+  ],
+  "kpis": [
+    {"metric": "Invoice Amount", "aggregation": "sum", "label": "$Total Revenue"},
+    {"metric": "count", "aggregation": "count", "label": "Number of Invoices"}
+  ],
+  "charts": [
+    {
+      "chart_id": "chart-0",
+      "type": "line",
+      "x": "Invoice Date",
+      "y": "Invoice Amount",
+      "title": "Monthly Revenue Trends Over Time",
+      "size": "full"
+    },
+    {
+      "chart_id": "chart-1",
+      "type": "bar",
+      "x": "Country",
+      "y": "Invoice Amount",
+      "title": "Revenue by Country",
+      "size": "1/2"
+    }
+  ],
+  "layout_grid": "3-col",
+  "narrative": "This dashboard reveals monthly revenue trends and regional performance, highlighting key insights for executive decision-making."
+}
+===========================
+
+====CONFIG_DICT====
+{'executive_summary': {'key_findings': ['Invoice Amount has increased by 12% YoY, indicating strong revenue growth.', 'Missing data in Country column at 3.6%, impacting international sales analysis accuracy.', 'Invoice Date shows consistent monthly invoicing pattern without significant seasonal variations.'], 'data_quality_score': 0.94, 'overall_health': 'Healthy', 'missing_data_pct': 3.6, 'reliability': 'High'}, 'trends': [{'column': 'Invoice Amount', 'direction': 'increasing', 'growth_rate': 0.12}, {'column': 'Invoice Date', 'direction': 'stable', 'growth_rate': 0}], 'data_quality': {'missing_values': {'Country': 3.6, 'col_name': 0.5}, 'outliers_detected': False, 'data_completeness': 0.98, 'recommendation': 'Data quality is high; proceed with confidence'}, 'insights': ['The consistent invoicing pattern suggests steady business operations throughout the year.', 'Growth in Invoice Amount indicates positive business performance.'], 'recommendations': ['Focus on expanding international sales to address data completeness issues in Country column.', 'Continue monitoring Invoice Amount trends for early indicators of revenue changes.'], 'filters': [{'column': 'Country', 'filter_type': 'dropdown', 'label': 'Country'}, {'column': 'Invoice Date', 'filter_type': 'date-range', 'label': 'Date Range'}], 'kpis': [{'metric': 'Invoice Amount', 'aggregation': 'sum', 'label': '$Total Revenue'}, {'metric': 'count', 'aggregation': 'count', 'label': 'Number of Invoices'}], 'charts': [{'chart_id': 'chart-0', 'type': 'line', 'x': 'Invoice Date', 'y': 'Invoice Amount', 'title': 'Monthly Revenue Trends Over Time', 'size': 'full'}, {'chart_id': 'chart-1', 'type': 'bar', 'x': 'Country', 'y': 'Invoice Amount', 'title': 'Revenue by Country', 'size': '1/2'}], 'layout_grid': '3-col', 'narrative': 'This dashboard reveals monthly revenue trends and regional performance, highlighting key insights for executive decision-making.'}
+======================
+[OK] LLM analysis successful
+[INFO] LLM suggested: 2 filters, 2 KPIs, 2 charts
+
+====CONFIG_DICT====
+{
+  "executive_summary": {
+    "key_findings": [
+      "Invoice Amount has increased by 12% YoY, indicating strong revenue growth.",
+      "Missing data in Country column at 3.6%, impacting international sales analysis accuracy.",
+      "Invoice Date shows consistent monthly invoicing pattern without significant seasonal variations."
+    ],
+    "data_quality_score": 0.94,
+    "overall_health": "Healthy",
+    "missing_data_pct": 3.6,
+    "reliability": "High"
+  },
+  "trends": [
+    {
+      "column": "Invoice Amount",
+      "direction": "increasing",
+      "growth_rate": 0.12
+    },
+    {
+      "column": "Invoice Date",
+      "direction": "stable",
+      "growth_rate": 0
+    }
+  ],
+  "data_quality": {
+    "missing_values": {
+      "Country": 3.6,
+      "col_name": 0.5
+    },
+    "outliers_detected": false,
+    "data_completeness": 0.98,
+    "recommendation": "Data quality is high; proceed with confidence"
+  },
+  "insights": [
+    "The consistent invoicing pattern suggests steady business operations throughout the year.",
+    "Growth in Invoice Amount indicates positive business performance."
+  ],
+  "recommendations": [
+    "Focus on expanding international sales to address data completeness issues in Country column.",
+    "Continue monitoring Invoice Amount trends for early indicators of revenue changes."
+  ],
+  "filters": [
+    {
+      "column": "Country",
+      "filter_type": "dropdown",
+      "label": "Country"
+    },
+    {
+      "column": "Invoice Date",
+      "filter_type": "date-range",
+      "label": "Date Range"
+    }
+  ],
+  "kpis": [
+    {
+      "metric": "Invoice Amount",
+      "aggregation": "sum",
+      "label": "$Total Revenue"
+    },
+    {
+      "metric": "count",
+      "aggregation": "count",
+      "label": "Number of Invoices"
+    }
+  ],
+  "charts": [
+    {
+      "chart_id": "chart-0",
+      "type": "line",
+      "x": "Invoice Date",
+      "y": "Invoice Amount",
+      "title": "Monthly Revenue Trends Over Time",
+      "size": "full"
+    },
+    {
+      "chart_id": "chart-1",
+      "type": "bar",
+      "x": "Country",
+      "y": "Invoice Amount",
+      "title": "Revenue by Country",
+      "size": "1/2"
+    }
+  ],
+  "layout_grid": "3-col",
+  "narrative": "This dashboard reveals monthly revenue trends and regional performance, highlighting key insights for executive decision-making."
+}
+=======================
+
+FILTER RAW: {'column': 'Country', 'filter_type': 'dropdown', 'label': 'Country'}
+FILTER RAW: {'column': 'Invoice Date', 'filter_type': 'date-range', 'label': 'Date Range'}
+KPI RAW: {'metric': 'Invoice Amount', 'aggregation': 'sum', 'label': '$Total Revenue'}
+KPI RAW: {'metric': 'count', 'aggregation': 'count', 'label': 'Number of Invoices'}
+[WARN] KPI metric 'count' not found in dataset, skipping
+CHART RAW: {'chart_id': 'chart-0', 'type': 'line', 'x': 'Invoice Date', 'y': 'Invoice Amount', 'title': 'Monthly Revenue Trends Over Time', 'size': 'full'}
+CHART RAW: {'chart_id': 'chart-1', 'type': 'bar', 'x': 'Country', 'y': 'Invoice Amount', 'title': 'Revenue by Country', 'size': '1/2'}
+STEP 7 - AFTER ANALYZE
+<class 'core.config.DashboardConfig'>
+DashboardConfig(filters=[FilterConfig(column='Country', filter_type='dropdown', label='Country', default_value=None), FilterConfig(column='Invoice Date', filter_type='date-range', label='Date Range', default_value=None)], kpis=[KPIConfig(metric='Invoice Amount', aggregation='sum', label='$Total Revenue', color='#1A365D', bg_color='#EFF6FF')], charts=[ChartConfig(chart_id='chart-0', chart_type='line', x_column='Invoice Date', y_column='Invoice Amount', groupby_column=None, size='full', aggregation='sum', title='Monthly Revenue Trends Over Time'), ChartConfig(chart_id='chart-1', chart_type='bar', x_column='Country', y_column='Invoice Amount', groupby_column=None, size='1/2', aggregation='sum', title='Revenue by Country')], layout_grid='3-col', reasoning='This dashboard reveals monthly revenue trends and regional performance, highlighting key insights for executive decision-making.')
+RETURNING TO STORE:
+<class 'str'>
+This dashboard reveals monthly revenue trends and regional performance, highlighting key insights for executive decision-making.
